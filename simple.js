@@ -60,13 +60,39 @@ const spinButton = document.getElementById("simpleSpinButton");
 const roulette = document.getElementById("roulette");
 
 const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
+let currentRotation = 0;
 
-spinButton.addEventListener("click", () => {
+function spinRouletteWheel() {
+    const extraSpins = 6 + Math.floor(Math.random() * 5);
+    const randomOffset = Math.random() * 360;
+    const nextRotation = currentRotation + extraSpins * 360 + randomOffset;
+
+    roulette.classList.remove("landed");
+    roulette.classList.add("spinning");
+    roulette.style.transition = "transform 3s cubic-bezier(0.12, 0.8, 0.18, 1)";
+    roulette.style.transform = `rotate(${nextRotation}deg)`;
+    currentRotation = nextRotation;
+
+    return new Promise((resolve) => {
+        const onEnd = () => {
+            roulette.classList.remove("spinning");
+            roulette.classList.add("landed");
+            roulette.removeEventListener("transitionend", onEnd);
+            resolve();
+        };
+        roulette.addEventListener("transitionend", onEnd, { once: true });
+    });
+}
+
+spinButton.addEventListener("click", async () => {
+    spinButton.disabled = true;
+
+    const spinPromise = spinRouletteWheel();
     const randomMenu = pickRandom(menus);
     const randomCourse = pickRandom(courses);
 
+    await spinPromise;
     resultElement.textContent = `오늘은 ${randomMenu}을(를) 먹고 ${randomCourse}을(를) 한다.`;
 
-    roulette.style.transition = "transform 2s ease-out";
-    roulette.style.transform = `rotate(${Math.random() * 360}deg)`;
+    spinButton.disabled = false;
 });

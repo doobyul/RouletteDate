@@ -23,6 +23,7 @@ const RECENT_HISTORY_KEY = "recentResults";
 const RECENT_LIMIT = 8;
 
 let detectedAddress = null;
+let currentRotation = 0;
 
 function loadRecentHistory() {
     try {
@@ -168,10 +169,34 @@ async function fetchIdeasByRegion(region) {
     return resp.json();
 }
 
+function spinRouletteWheel() {
+    const extraSpins = 6 + Math.floor(Math.random() * 5); // 6~10바퀴
+    const randomOffset = Math.random() * 360;
+    const nextRotation = currentRotation + extraSpins * 360 + randomOffset;
+
+    roulette.classList.remove("landed");
+    roulette.classList.add("spinning");
+    roulette.style.transition = "transform 3.2s cubic-bezier(0.12, 0.8, 0.18, 1)";
+    roulette.style.transform = `rotate(${nextRotation}deg)`;
+    currentRotation = nextRotation;
+
+    return new Promise((resolve) => {
+        const onEnd = () => {
+            roulette.classList.remove("spinning");
+            roulette.classList.add("landed");
+            roulette.removeEventListener("transitionend", onEnd);
+            resolve();
+        };
+        roulette.addEventListener("transitionend", onEnd, { once: true });
+    });
+}
+
 spinButton.addEventListener("click", async () => {
     spinButton.disabled = true;
 
     try {
+        const spinPromise = spinRouletteWheel();
+
         const manualRegion = (manualRegionInput?.value || "").trim();
         const scope = getSelectedScope();
         const scopedDetectedRegion = extractRegionByScope(detectedAddress, scope);
@@ -204,6 +229,7 @@ spinButton.addEventListener("click", async () => {
             ? `${datePlace.name}`
             : randomCourse;
 
+        await spinPromise;
         resultElement.textContent = `오늘은 ${selectedRegion}에서 ${foodText}에 가고 ${dateText}에 간다.`;
 
         saveRecentHistory([
@@ -215,10 +241,6 @@ spinButton.addEventListener("click", async () => {
                 ts: Date.now(),
             },
         ]);
-
-        // 룰렛 애니메이션 (간단한 예시)
-        roulette.style.transition = "transform 2s ease-out";
-        roulette.style.transform = `rotate(${Math.random() * 360}deg)`;
     } catch (error) {
         const randomRegion = pickRandom(regions);
         const randomMenu = pickRandom(menus);
