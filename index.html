@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roulette Date</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="pageNav">
+            <a href="index.html">메인(상호명 기반)</a> |
+            <a href="simple.html">심플 랜덤 버전</a>
+        </div>
+        <h1>오늘의 데이트 코스</h1>
+        <div id="locationControls">
+            <p><strong>지역 기준 설정</strong></p>
+            <label for="manualRegionInput">지역 직접 입력:</label>
+            <input id="manualRegionInput" type="text" placeholder="예: 성수동, 강남구, 수원시" />
+            <p class="hint">입력값이 있으면 해당 지역을 우선 사용하고, 비어있으면 현재 위치 기반으로 탐지합니다.</p>
+            <label><input type="radio" name="regionScope" value="dong" checked> 동 기준</label>
+            <label><input type="radio" name="regionScope" value="gu"> 구 기준</label>
+            <label><input type="radio" name="regionScope" value="si"> 시 기준</label>
+            <br>
+            <button id="detectLocationButton" type="button">현재 위치 사용</button>
+            <p id="locationStatus">현재 지역: (미설정)</p>
+        </div>
+        <p id="result">"오늘은 [지역]에서 [음식메뉴]을(를) 먹고 [데이트코스]을(를) 간다."</p>
+        <button id="spinButton">룰렛 돌리기</button>
+        <div id="roulette"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #111;
+}
+
+#app {
+    margin: 76px auto 40px;
+    padding: 0 12px;
+    max-width: 920px;
+    box-sizing: border-box;
+}
+
+.pageNav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    margin: 0;
+    padding: calc(10px + env(safe-area-inset-top)) 12px 10px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 14px;
+}
+
+.pageNav a {
+    color: #007BFF;
+    text-decoration: none;
+    margin: 0 4px;
+}
+
+.pageNav a:hover {
+    text-decoration: underline;
+}
+
+#locationControls {
+    margin: 0 auto 16px;
+    max-width: 560px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+#locationControls label {
+    margin: 0 8px;
+}
+
+#manualRegionInput {
+    width: 100%;
+    max-width: 420px;
+    padding: 8px;
+    margin: 6px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.hint {
+    margin: 4px 0 10px;
+    color: #666;
+    font-size: 13px;
+}
+
+#detectLocationButton {
+    margin-top: 8px;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+}
+
+#detectLocationButton:hover {
+    background-color: #218838;
+}
+
+#locationStatus {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+#roulette {
+    width: min(300px, 80vw);
+    height: min(300px, 80vw);
+    margin: 20px auto;
+    border: 5px solid #333;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+#spinButton {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#spinButton:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    #app {
+        margin-top: 84px;
+        padding: 0 10px 24px;
+    }
+
+    h1 {
+        font-size: 24px;
+        line-height: 1.3;
+        margin: 10px 0 14px;
+    }
+
+    .pageNav {
+        font-size: 13px;
+        line-height: 1.5;
+        padding: calc(8px + env(safe-area-inset-top)) 10px 8px;
+    }
+
+    #locationControls {
+        padding: 10px;
+        text-align: left;
+    }
+
+    #locationControls label {
+        display: inline-block;
+        margin: 4px 6px 4px 0;
+        font-size: 14px;
+    }
+
+    #manualRegionInput {
+        max-width: 100%;
+        font-size: 16px;
+    }
+
+    #result,
+    #simpleResult {
+        font-size: 15px;
+        line-height: 1.5;
+        padding: 0 4px;
+        word-break: keep-all;
+    }
+
+    #spinButton,
+    #detectLocationButton,
+    #simpleSpinButton {
+        width: min(360px, 92vw);
+        max-width: 100%;
+        min-height: 44px;
+        font-size: 16px;
+    }
+
+    #roulette {
+        width: min(260px, 76vw);
+        height: min(260px, 76vw);
+        border-width: 4px;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #f1f1f1;
+    }
+
+    .pageNav {
+        background: rgba(18, 18, 18, 0.92);
+        border-bottom: 1px solid #2a2a2a;
+    }
+
+    .pageNav a {
+        color: #7db4ff;
+    }
+
+    #locationControls {
+        background: #1d1d1d;
+        border-color: #333;
+    }
+
+    #manualRegionInput {
+        background: #111;
+        color: #f1f1f1;
+        border-color: #3a3a3a;
+    }
+
+    .hint,
+    #locationStatus {
+        color: #c8c8c8;
+    }
+
+    #roulette {
+        border-color: #999;
+    }
+
+    #spinButton {
+        background-color: #2d79ff;
+    }
+
+    #spinButton:hover {
+        background-color: #2364d1;
+    }
+
+    #detectLocationButton {
+        background-color: #1f8a46;
+    }
+
+    #detectLocationButton:hover {
+        background-color: #176a35;
+    }
+}

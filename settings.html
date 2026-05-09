@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <h1>설정 페이지</h1>
+        <form id="settingsForm">
+            <label for="regions">지역 목록 (쉼표로 구분):</label><br>
+            <textarea id="regions" rows="3">서울,부산,제주,대구,광주</textarea><br><br>
+
+            <label for="menus">음식 메뉴 목록 (쉼표로 구분):</label><br>
+            <textarea id="menus" rows="3">한식,중식,일식,양식,분식</textarea><br><br>
+
+            <label for="courses">데이트 코스 목록 (쉼표로 구분):</label><br>
+            <textarea id="courses" rows="3">영화 보기,산책,카페 가기,전시회 관람,놀이공원</textarea><br><br>
+
+            <button type="button" id="saveSettings">저장</button>
+        </form>
+    </div>
+    <script src="settings.js"></script>
+</body>
+</html>
